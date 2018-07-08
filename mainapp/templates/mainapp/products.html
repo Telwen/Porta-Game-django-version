@@ -1,0 +1,52 @@
+{% extends 'mainapp/base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <div class='links clearfix'>
+        <ul class="header_line">
+            <li>
+                <a href="{% url 'products:index' %}"
+                   class="{% if request.resolver_match == products %}active{% endif %}">
+                    All
+                </a>
+            </li>
+            {% for links in menu_category %}
+                <li>
+                    <a href="{% url 'products:category' links.id %}"
+                       class="{% if request.resolver_match.kwargs.pk|add:0 == links.pk %}active{% endif %}">
+                        {{ links.name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="pagiantor">
+        {%  if products.has_previous %}
+            <a href="{% url 'products:category_page' category.pk products.previous_page_number %}"><</a>
+        {% endif %}
+        <span class="current">
+            Страница {{ products.number }} из {{ products.paginator.num_pages }}
+        </span>
+        {% if products.has_next %}
+            <a href="{% url 'products:category_page' category.pk products.next_page_number %}">></a>
+        {% endif %}
+
+    </div>
+    <div class=>
+        {% for items in products %}
+            <div class="Item">
+                <a href="{% url 'products:product_page' items.pk %}">
+                    <img src="/media/{{ items.img }}" width="200px">
+                    {#                        <div class="text">#}
+                    {#                            <img src="{% static 'IMG/icon-hoverd.png' %}">#}
+                    {#                            <h3>{{ items.price }}</h3>#}
+                    {#                        </div>#}
+
+                </a>
+                <figcaption><a href="#">{{ items.name }}</a></figcaption>
+
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

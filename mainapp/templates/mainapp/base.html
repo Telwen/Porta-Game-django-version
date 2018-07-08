@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    {% block links %}
+        <link rel="icon" href="/static/IMG/faw.png">
+        <link rel="stylesheet" href="{% static 'CSS/bootstrap-reboot.min.css' %}">
+        <link rel="stylesheet" href="{% static 'CSS/bootstrap-grid.min.css' %}">
+        <link rel="stylesheet" href="{% static 'CSS/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'CSS/Style.css' %}">
+        <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/bootbox.min.js' %}"></script>
+    {% endblock %}
+    <title>
+        {% block title %}
+            {{ title| title }}
+        {% endblock %}
+    </title>
+
+
+</head>
+
+<body>
+<div class="container">
+    {% block menu %}
+        {% include 'mainapp/includes/menu.html' %}
+    {% endblock %}
+
+    <div class="content" align="center">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+</div>
+
+<hr style="margin-bottom: 0px">
+{% block footer %}
+    <div class="Footer">
+        <p class="Footer_text">©Все права защищены</p>
+    </div>
+{% endblock %}
+
+
+</body>
+</html>

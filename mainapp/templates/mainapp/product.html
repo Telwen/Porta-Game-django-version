@@ -1,0 +1,38 @@
+{% extends 'mainapp/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    {{ item.name }}
+{% endblock %}
+
+{% block content %}
+    <div class="it_cont">
+        <div class="up_content">
+            <p><img class="it" src="/media/{{ item.img }}"> {{ item.tiny_desc }}  </p>
+            <h2>Стоимость - {{ item.price }} USD</h2>
+            <input type="button" class="button" value="Купить" onclick="location.href=
+            {% if user.is_authenticated %}
+                '{% url 'basket:add' item.id %}'"/>
+            {% else %}
+                '{% url 'auth:login'%}'"/>
+            {% endif %}
+            <div style="clear:both">
+            </div>
+        </div>
+        <br><br><br><br><br><br>
+        <div class="mid_content">
+            <h3>Об этой игре</h3>
+            <p>{{ item.desc }}</p>
+        </div>
+        <hr>
+        <h3>Так же вам могут понравится</h3>
+        {% for items in same_products %}
+            <div class="Item">
+                <a href="{% url 'products:product_page' items.id %}"> <img src="/media/{{ items.img }}"
+                                                                           width="200px"></a>
+                <figcaption><a href="#">{{ items.name }} </a></figcaption>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

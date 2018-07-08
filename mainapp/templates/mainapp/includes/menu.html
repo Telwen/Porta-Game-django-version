@@ -1,0 +1,45 @@
+<div class="Header">
+    {% load staticfiles %}
+    <div class="head-row1">
+        {% if user.is_authenticated %}
+            <button type="button" class="menu_button" onclick=location.href="{% url 'auth:logout' %}">Выход</button>
+            <button type="button" class="menu_button" onclick=location.href="{% url 'auth:edit' %}">Личный кабинет
+            </button>
+            {% if user.is_superuser %}
+                <button type="button" class="menu_button" onclick=location.href="{% url 'admin:user' %}">Администрирование
+                </button>
+            {% endif %}
+            <button type="button" class="menu_button"
+                    onclick=location.href="{% url 'basket:basket_view' %}"> {{ basket.0.total_quantity|default:0}} товаров в
+                корзине
+            </button>
+        {% else %}
+            <button type="button" class="menu_button" onclick=location.href="{% url 'auth:login' %}">Вход</button>
+            <button type="button" class="menu_button" onclick=location.href="{% url 'auth:registration' %}">
+                Регистрация
+            </button>
+        {% endif %}
+    </div>
+    <div class="head-row2">
+        <div class="he_1">
+            <a href="{% url 'index' %}"> <img src="{% static 'IMG/logo.png' %}" alt="logo" width="250px"></a>
+        </div>
+
+        <div>
+            <ul class="header_line">
+                {% for link in menu_links %}
+                    <li><a href="{% url link.href %}"> {{ link.name }}</a></li>
+                {% endfor %}
+        </div>
+    </div>
+</div>
+
+<hr>
+{#        <div>#}
+{#            <input class="serch" type="text" size="70" placeholder="Поиск по сайту"#}
+{#                   oninput="findInGameList(this.value)">#}
+{#            <div id="find-result">#}
+{#                <ul></ul>#}
+{#            </div>#}
+{#            <br><br>#}
+{#        </div>#}

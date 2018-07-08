@@ -1,0 +1,50 @@
+{% extends 'mainapp/base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <div class="slidebar">
+        <input checked type="radio" name="respond" id="desktop">
+        <article id="slider">
+            {% for _ in slidebar_img %}
+                <input {% if forloop.first %}checked{% endif %}
+                       type="radio" name="slider" id="switch{{ forloop.counter }}">
+            {% endfor %}
+
+            <div id="slides">
+                <div id="overflow">
+                    <div class="image">
+                        {% for img in slidebar_img %}
+                            <article><a href="#"><img src="{% static img %}"></a></article>
+                        {% endfor %}
+
+
+                    </div>
+                </div>
+            </div>
+            <div id="controls">
+                {% for _ in slidebar_img %}
+                    <label for="switch{{ forloop.counter }}" class="btn-next
+                    {% if forloop.first %}btn-active{% endif %}"> </label>
+                {% endfor %}
+
+            </div>
+            <div id="active">
+                {%  for _ in slidebar_img %}
+                    <label for="switch{{ forloop.counter }}"> </label>
+                {% endfor %}
+
+            </div>
+        </article>
+    </div>
+    <div class="content" align="center">
+    <br>
+        <h2 align="center">Последние покупки на сайте </h2>
+
+        {% for items in leaders_of_sells %}
+            <div class="Item">
+                <a href="{% url 'products:product_page' items.id %}"> <img src="/media/{{ items.img }}" width="200px"></a>
+                <figcaption><a href="#">{{ items.name }} </a></figcaption>
+            </div>
+        {% endfor %}
+
+    </div>
+{% endblock %}
