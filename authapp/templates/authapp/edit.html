@@ -1,0 +1,17 @@
+{% extends 'authapp/base.html'%}
+{% load staticfiles %}
+
+{% block content %}
+
+    <form action="{% url 'auth:edit' %}" class="login"
+          method='post' enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{edit_form.as_p}}
+
+
+        <br>
+        <input type='submit' class='form-control regbut' value='Внести изменения'>
+
+    </form>
+{% endblock %}

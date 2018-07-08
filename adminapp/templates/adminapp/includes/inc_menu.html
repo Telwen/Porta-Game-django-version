@@ -1,0 +1,13 @@
+<ul class="header_line">
+    <li>
+        <a href="{% url 'admin:user' %}" class="{% if request.resolver_match.url_name == 'user' %}active{% endif %}">
+            Пользователи
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'admin:categories' %}" 
+        class="{% if request.resolver_match.url_name == 'categories' or category.name %}active{% endif %}">
+            категории{% if category %}:<span>{{ category.name }}</span>{% endif %}
+        </a>
+    </li>
+</ul>

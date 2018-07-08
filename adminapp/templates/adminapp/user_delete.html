@@ -1,0 +1,17 @@
+{% extends 'adminapp/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="user_delete">
+        Уверены, что хотите удалить {{ object.username }}?
+            <form method="post" action="{% url 'admin:user_delete' object.pk %}">
+        {% csrf_token %}
+        <br><input type="submit" class="btn btn-danger" value="Удалить">
+        </form>
+        <br><br>
+
+        <button class="menu_button" onclick=location.href="{% url 'admin:user' %}">
+            К списку пользователей
+        </button>
+    </div>
+{% endblock %}

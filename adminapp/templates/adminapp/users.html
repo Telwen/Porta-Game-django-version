@@ -1,0 +1,46 @@
+{% extends 'adminapp/base.html' %}
+{% load staticfiles %}
+{% load admin_tags %}
+
+
+
+{% block content %}
+    <div class="users_list">
+		<button class="menu_button" onclick=location.href="{% url 'admin:user_create' %}">
+			Новый пользователь
+		</button><br><br>
+		{% for object in object_list %}
+			<div class="user_record {% if not object.is_active %}not_active{% endif %}">
+				<img src="{{ object.avatar|media_folder_users }}" alt="{{ object.username }}" width="200px"><br><br>
+				<div class="user_role">Статус:
+					{% if object.is_superuser %}администратор{% else %}пользователь{% endif %}
+					<button class="menu_button" onclick=location.href="{% url 'admin:user_update' object.pk %}">
+						Редактировать
+					</button>
+					<button class="menu_button" onclick=location.href="{% url 'admin:user_delete' object.pk %}">
+						Удалить
+					</button>
+				</div>
+				<div class="user_name">
+					<p>
+						Username: {{ object.username }}
+					</p>
+					<p>
+					{% if object.first_name %}
+						<p>First name: {{ object.first_name|title }}</p>
+						{% if object.last_name %}
+							<p>{{ object.last_name|title }}</p>
+						{% endif %}
+					{% endif %}
+					</p>
+					age:
+					{{ object.age }}<br>
+					email:
+					{{ object.email }}
+					<br>logged:
+					{{ object.last_login }}
+				</div>
+			</div> <br><br>
+		{% endfor%}
+	</div>
+{% endblock %}

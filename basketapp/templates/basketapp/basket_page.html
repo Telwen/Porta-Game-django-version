@@ -1,0 +1,36 @@
+{% extends 'basketapp/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+            {{ title| title }}
+        {% endblock %}
+
+{% block content %}
+    <div class="container basket">
+        {% for item in basket_items %}
+            <div class="basket_element">
+                <div class="pic">
+                    <img class="basket_pic" src="/media/{{ item.product.img }}" width="200px">
+                </div>
+                <div class="cont">
+                    <ul class="basket_list">{{ item.product.name }}
+                        <li>Цена - {{ item.product.price }} USD</li>
+                        <li>Количество <input type="number" name="{{ item.id }}" min="0" value="{{ item.quantity }}"></li>
+                        <li> Итоговая стоимость - {{ item.product_cost }} USD</li>
+                        <li>
+                            <button onclick=location.href="{% url 'basket:remove' item.id %}">
+                                Удалить товар
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+        <hr>
+        {% if basket_items %}
+            <div class="summory">
+                <h2>В корзине {{ basket_items.0.total_quantity }} товаров на сумму {{ basket_items.0.total_cost }} USD</h2>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

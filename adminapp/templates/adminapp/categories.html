@@ -1,0 +1,33 @@
+{% extends 'adminapp/base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+    <div class="categories_list">
+		<button class="menu_button" onclick=location.href="{% url 'admin:category_create' %}">
+			Новая категория
+		</button><br><br>
+		
+		{% for object in object_list %}
+			<div class="category_record {% if not object.is_active %}not_active{% endif %}">
+				<div class="category_name">
+					{{ object.name|title }}
+				</div>
+                <div class="category_actions">
+                    <button class="menu_button" onclick=location.href="{% url 'admin:products' object.pk %}">
+                        Товары категории
+                    </button>
+                    <button class="menu_button" onclick=location.href="{% url 'admin:category_update' object.pk %}">
+                        Редактировать
+                    </button>
+                    <button class="menu_button" onclick=location.href="{% url 'admin:category_delete' object.pk %}">
+                        Удалить
+                    </button>
+                </div>
+				<div class="category_desc">
+					{{ object.desc }}
+				</div><br><br>
+			</div>
+		{% endfor%}
+	</div>
+{% endblock %}

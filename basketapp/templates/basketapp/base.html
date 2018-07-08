@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+
+        {% endblock %}
+    </title>
+    <link rel="icon" href="/static/IMG/faw.png">
+    <link rel="stylesheet" href="{% static 'CSS/bootstrap-reboot.min.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/bootstrap-grid.min.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/Style.css' %}">
+    <script src="{% static 'js/main.js' %}"></script>
+</head>
+<body>
+<div class="container">
+    <div class="login">
+        <div class="h2 text-center head">
+            <img src="">
+            <a href="{% url 'index' %}"> <img src="{% static 'IMG/logo.png' %}" alt="logo" width="250px"></a>
+            <br>
+            Ваша корзина
+        </div>
+        {% block content %}
+
+        {% endblock %}
+    </div>
+
+</div>
+
+</body>
+</html>
