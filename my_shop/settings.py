@@ -25,7 +25,7 @@ SECRET_KEY = '@^6hc0)sr^v@_#%3t7((4#k23c=kp5z-tn*k^)7nm*(03kofqi'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['telwen.pythonanywhere.com',]
 
 
 # Application definition
